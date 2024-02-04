@@ -1,0 +1,497 @@
+
+
+═══════════════════════════════════════════════════> Estruturas de dados
+Documentação => // https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-8.0
+
+
+
+
+Array
+Dictionary<TKey,TValue>
+HashSet<T>
+ImmutableArray<T> 
+ImmutableDictionary<TKey, TValue>
+List<T>
+LinkedList<T>
+Queue<T>
+SortedDictionary<TKey,TValue>
+SortedList<TKey,TValue>
+SortedSet<T>
+Stack<T>
+SortedDictionary<TKey,TValue> vs SortedList<TKey,TValue>
+
+
+
+═══════════════════════════════════════════════════> Array
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.array?view=net-8.0
+
+
+-- Vantagens
+
+- Acesso Direto por Índice:
+Permite acesso direto e eficiente aos elementos por índice, facilitando a recuperação e manipulação dos dados.
+
+- Implementação Simples:
+É uma estrutura de dados fundamental e simples, sendo fácil de entender e usar.
+
+- Performance em Algoritmos Simples:
+Oferece bom desempenho em algoritmos simples, especialmente quando o tamanho do conjunto de dados é conhecido 
+e constante.
+
+- Suporte nativo ao BinarySearch quando o array está ordenado
+Array.BinarySearch()
+
+
+-- Desvantagens
+
+- Tamanho Fixo:
+O tamanho do array é fixo após a criação, o que pode ser limitante em situações em que o número de elementos 
+pode variar dinamicamente.
+
+- Ineficiência em Inserções e Remoções:
+Operações de inserção e remoção de elementos no meio do array podem ser ineficientes, pois exigem deslocamento 
+de elementos.
+
+- Alocação Estática de Memória:
+A alocação de memória é estática, e o tamanho do array precisa ser conhecido antecipadamente, o que pode 
+resultar em alocação de memória desnecessária.
+
+- Sem Suporte a Métodos Avançados:
+Não oferece métodos avançados para operações complexas, como ordenação, filtragem, ou manipulação de coleções.
+
+
+
+═══════════════════════════════════════════════════> Dictionary<TKey,TValue>
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2?view=net-8.0
+
+
+-- Vantagens:
+
+- Eficiência na busca (O(1)): 
+O Dictionary é implementado como uma tabela de hash, o que permite uma busca eficiente de elementos com 
+base na chave. Isso resulta em um tempo médio de busca constante, O(1), para operações de leitura e gravação.
+
+- Sem duplicatas de chaves:
+Cada chave em um Dictionary é única. Isso garante que não haja chaves duplicadas, facilitando a recuperação de 
+valores associados a uma chave específica.
+
+- Alta performance para operações de adição/remoção:
+Adicionar ou remover elementos em um Dictionary é rápido, especialmente quando comparado a outras estruturas de
+dados que podem ter complexidade maiorpara essas operações.
+
+- Flexibilidade nas chaves e valores:
+O Dictionary permite que você use uma ampla variedade de tipos para as chaves e os valores, proporcionando 
+flexibilidade no design e na implementação de suas estruturas de dados.
+
+- Iteração eficiente:
+A iteração sobre um Dictionary é eficiente e pode ser feita de forma simples usando construções como foreach.
+
+- API rica:
+Fornece uma API rica com métodos úteis para manipulação de dados.
+
+
+-- Desvantagens:
+
+- Sem ordem previsível:
+Os elementos em um Dictionary não são armazenados em uma ordem específica. Se você precisa iterar pelos elementos em 
+uma ordem específica, pode ser necessário considerar outras estruturas de dados, como SortedDictionary ou SortedList.
+
+- Uso de memória:
+O Dictionary pode consumir mais memória em comparação com estruturas de dados mais simples, especialmente quando há um 
+grande número de elementos ou quando a tabela de hash precisa ser redimensionada.
+
+
+
+═══════════════════════════════════════════════════> HashSet<T>
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1?view=net-8.0
+
+
+-- Vantagens
+
+- Sem elementos duplicados:
+O HashSet garante que todos os elementos armazenados são únicos, o que é útil quando você precisa manter uma coleção de valores 
+distintos.
+
+- Eficiência em operações de conjunto:
+O HashSet é otimizado para realizar operações de conjunto, como união, interseção e diferença, de maneira eficiente. 
+Essas operações são executadas em tempo constante ou próximo disso.
+
+- Verificação rápida de pertencimento:
+Verificar se um elemento pertence a um HashSet é uma operação muito rápida, com tempo médio próximo de O(1).
+
+- Desempenho eficiente para adição e remoção de elementos:
+Adicionar e remover elementos em um HashSet é rápido e eficiente. Isso é especialmente útil quando você precisa manter
+ uma coleção dinâmica 
+de elementos exclusivos.
+
+
+-- Desvantagens
+
+- Sem ordem previsível:
+Os elementos em um HashSet não são armazenados em uma ordem específica, o que pode ser uma limitação em casos que 
+requerem ordem definida.
+
+- Uso de memória:
+O HashSet pode consumir mais memória do que estruturas mais simples, especialmente quando há um grande número de elementos.
+
+- Não fornece acesso direto por índice aleatório:
+Significa que você não pode acessar elementos por meio de um índice específico como faria em uma lista ou um array.
+
+- Necessidade de comparador externo para tipos complexos:
+Quando você utiliza um HashSet<T>, a estrutura depende da implementação dos métodos GetHashCode e Equals para 
+realizar operações de comparação e garantir a unicidade dos elementos. Para tipos complexos, como classes 
+personalizadas, as implementações padrão desses métodos podem não ser suficientes para garantir a correta comparação.
+
+
+
+═══════════════════════════════════════════════════> ImmutableArray<T> 
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray?view=net-8.0
+
+
+-- Vantagens
+
+- Imutabilidade:
+Os dados da ImmutableArray são imutáveis, o que significa que não podem ser alterados após a criação, proporcionando 
+segurança em ambientes concorrentes.
+
+- Eficiência em Leitura:
+Oferece boa eficiência em operações de leitura, uma vez que os dados são estáveis e não mudam.
+
+- Acesso por Índice: 
+Permite acesso direto aos elementos por índice, o que facilita a recuperação e manipulação eficiente dos dados.
+
+- API rica:
+Oferece uma API rica com métodos que permitem operações funcionais, como mapeamento, filtragem e concatenação, 
+sem modificar a instância original.
+
+- Suporte nativo ao BinarySearch quando o ImmutableArray está ordenado
+
+- Thread Safe
+
+
+-- Desvantagens
+
+- Criação Potencialmente Mais Custosa:
+A criação de uma ImmutableArray pode ser mais custosa em termos de desempenho do que a criação de um array tradicional,
+especialmente para conjuntos de dados pequenos.
+
+- Necessidade de Criação Constante:
+A imutabilidade significa que, para realizar alterações, você precisa criar novas instâncias, o que pode ser 
+inconveniente em alguns cenários.
+
+
+
+═══════════════════════════════════════════════════> ImmutableDictionary<TKey, TValue>
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutabledictionary?view=net-8.0
+
+
+-- Vantagens
+
+- Imutabilidade:
+Os dados na ImmutableDictionary são imutáveis, proporcionando segurança em ambientes concorrentes e facilitando a 
+criação de cópias sem alterar o original.
+
+- Eficiência em Leitura:
+Oferece eficiência em operações de leitura, pois os dados são imutáveis e não mudam após a criação.
+
+- API Rica:
+Possui uma API funcional rica com métodos para realizar operações como adição, remoção e atualização de pares 
+chave-valor sem modificar a instância original.
+
+- Sem Overhead de Cópias Desnecessárias:
+A imutabilidade é projetada para evitar cópias desnecessárias de dados, otimizando o desempenho em algumas operações.
+
+- Thread Safe
+
+
+-- Desvantagens
+
+- Criação Potencialmente Mais Custosa:
+Isso ocorre porque a imutabilidade implica na criação de novas instâncias para refletir alterações, o que pode resultar 
+em um maior consumo de memória.
+
+- Criação de Novas Instâncias:
+A imutabilidade requer a criação de novas instâncias para realizar alterações, o que pode ser inconveniente em certos 
+cenários.
+
+
+═══════════════════════════════════════════════════> List<T>
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=net-8.0
+
+
+-- Vantagens
+
+- Flexibilidade:
+A List<T> é uma coleção dinâmica que pode crescer ou encolher conforme necessário, oferecendo flexibilidade na 
+manipulação de elementos.
+
+- Acesso por Índice: 
+Permite acesso direto aos elementos por índice, o que facilita a recuperação e manipulação eficiente dos dados.
+
+- Operações de Adição e Remoção Eficientes:
+Adicionar e remover elementos no final da lista é eficiente, e operações em outras posições são viáveis.
+
+- Implementação Simples:
+Fácil de usar e entender, sendo uma escolha padrão para armazenamento e manipulação de coleções de dados.
+
+- Suporte a Tipos de Valor e Referência:
+Funciona bem com tipos de valor e tipos de referência, tornando-a versátil em diversos cenários.
+
+- Suporte nativo ao BinarySearch quando a lista está ordenada
+
+- API rica:
+Fornece uma API rica com métodos úteis para manipulação de dados.
+
+
+-- Desvantagens
+
+- Ineficiente para Inserção e Remoção no Meio:
+Operações de inserção e remoção no meio da lista podem ser ineficientes, especialmente em grandes conjuntos de
+dados, devido ao deslocamento de elementos.
+
+- Consumo de Memória:
+Pode consumir mais memória do que estruturas mais eficientes, especialmente quando há uma grande quantidade de 
+elementos, devido à capacidade interna que pode ser maior do que o tamanho atual da lista.
+
+- Busca Linear:
+A busca por um elemento requer uma varredura linear na lista, o que pode ser menos eficiente do que estruturas de 
+dados otimizadas para essa operação, como Dictionary ou HashSet.
+
+- Ordenação Pode ser Ineficiente:
+A ordenação da lista pode ser ineficiente para grandes conjuntos de dados, e a complexidade é O(n log n) para a 
+maioria dos algoritmos de ordenação.
+
+
+
+═══════════════════════════════════════════════════> LinkedList<T>
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.linkedlist-1?view=net-8.0
+
+
+-- Vantagens
+
+- Inserção e Remoção Eficientes no Meio da Lista:
+Operações de inserção e remoção no meio da lista são mais eficientes em comparação com a List<T>, pois não exigem 
+deslocamento de elementos.
+
+-- Desvantagens
+
+- Não fornece acesso direto por índice aleatório:
+Significa que você não pode acessar elementos por meio de um índice específico como faria em uma lista ou um array.
+
+- Maior Uso de Memória por Nó:
+Cada elemento em uma LinkedList<T> requer um nó adicional, o que pode aumentar o uso de memória em comparação com 
+estruturas de arrays.
+
+- Complexidade de Implementação:
+A manipulação de nós e a lógica de encadeamento podem adicionar complexidade à implementação e manutenção do código.
+
+
+
+═══════════════════════════════════════════════════> Queue<T>
+
+=> Documentação: https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.queue-1?view=net-8.0
+
+
+-- Vantagens
+
+- FIFO (First-In-First-Out):
+Garante a ordem de chegada dos elementos, sendo apropriada para situações em que a ordem de processamento é crítica.
+
+- Operações Eficientes:
+Oferece operações eficientes de enfileiramento (Enqueue) e desenfileiramento (Dequeue), com complexidade de tempo 
+constante (O(1)).
+
+- Implementação Simples:
+Fácil de usar e entender, sendo uma escolha natural para situações em que o modelo FIFO é adequado.
+
+
+-- Desvantagens
+
+- Não fornece acesso direto por índice aleatório:
+Significa que você não pode acessar elementos por meio de um índice específico como faria em uma lista ou um array.
+
+- Limitada a Estrutura FIFO:
+Sua natureza FIFO pode ser uma desvantagem em cenários que requerem acesso a elementos em ordens diferentes, 
+como operações de prioridade.
+
+
+
+═══════════════════════════════════════════════════> SortedDictionary<TKey,TValue>
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sorteddictionary-2?view=net-8.0
+
+
+-- Vantagens
+
+- Ordenação Automática:
+Mantém os elementos automaticamente ordenados com base nas chaves, facilitando a recuperação em ordem.
+
+- Eficiência em Busca e Recuperação:
+Oferece busca eficiente (O(log n)) e recuperação de valores com base nas chaves devido à ordenação interna.
+
+- Iteração em Ordem:
+Facilita a iteração em ordem, sendo útil em cenários que requerem processamento sequencial de elementos.
+
+- Suporte a Intervalo de Chaves:
+Fornece métodos para recuperação de elementos dentro de um intervalo específico de chaves.
+
+- API rica:
+Fornece uma API rica com métodos úteis para manipulação de dados.
+
+
+-- Desvantagens
+
+- Maior Uso de Memória:
+Pode consumir mais memória em comparação com estruturas não ordenadas devido à necessidade de manter a ordem interna.
+
+- Desempenho de Inserção e Remoção Menos Eficiente:
+Operações de inserção e remoção podem ser menos eficientes do que em estruturas não ordenadas, especialmente em 
+conjuntos de dados grandes.
+
+- Complexidade Adicional:
+A ordenação adiciona complexidade à implementação e pode aumentar a dificuldade de manutenção do código.
+
+- Restrições nas Chaves:
+A ordenação é baseada nas chaves, e não nos valores, o que pode ser uma limitação em cenários que exigem ordenação por 
+valores específicos.
+
+
+
+═══════════════════════════════════════════════════> SortedList<TKey,TValue>
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedlist-2?view=net-8.0
+
+
+-- Vantagens
+
+- Ordenação Automática:
+Mantém os elementos automaticamente ordenados com base nas chaves, facilitando a recuperação em ordem.
+
+- Eficiência em Busca e Recuperação:
+Oferece busca eficiente (O(log n)) e recuperação de valores com base nas chaves devido à ordenação interna.
+
+- Suporte a Intervalo de Índices e Chaves:
+Fornece métodos para recuperação de elementos dentro de um intervalo específico de índices ou chaves.
+
+- Fornece acesso direto por índice aleatório
+
+
+-- Desvantagens
+
+- Ineficiência em Inserções e Remoções Frequentes:
+Operações de adição e remoção podem ser menos eficientes em comparação com estruturas que não requerem 
+reordenação constante, como List ou Dictionary.
+
+
+
+═══════════════════════════════════════════════════> SortedSet<T>
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1?view=net-8.0
+
+
+-- Vantagens
+
+- Ordenação Automática:
+Mantém os elementos automaticamente ordenados, facilitando a recuperação em ordem.
+
+- Eficiência em Busca e Inserção:
+ Oferece operações eficientes de busca (O(log n)) e inserção de elementos mantendo a ordenação.
+
+- Sem Elementos Duplicados:
+Garante que todos os elementos são únicos, sendo útil quando a exclusividade de elementos é crucial.
+
+- Operações de Conjunto Eficientes:
+Suporta eficientemente operações de conjunto, como união, interseção e diferença.
+
+- Suporte a Intervalos de Elementos:
+Fornece métodos para recuperar elementos dentro de intervalos específicos.
+
+
+-- Desvantagens
+
+- Uso de Memória:
+Pode consumir mais memória em comparação com estruturas mais simples, especialmente quando há um grande 
+número de elementos.
+
+- Complexidade de Implementação:
+A ordenação adiciona complexidade à implementação e pode aumentar a dificuldade de manutenção do código.
+
+- Não fornece acesso direto por índice aleatório:
+Significa que você não pode acessar elementos por meio de um índice específico como faria em uma lista ou um array.
+
+- Limitado a Tipos Comparáveis:
+Requer que os elementos sejam comparáveis, limitando a utilização em cenários onde a comparação entre elementos 
+não é trivial.
+
+
+
+═══════════════════════════════════════════════════> Stack<T>
+
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.stack-1?view=net-8.0
+
+
+-- Vantagens
+
+- LIFO (Last-In-First-Out):
+Opera no princípio "o último a entrar é o primeiro a sair", sendo útil em situações que exigem essa ordem de 
+processamento.
+
+- Implementação Simples:
+Fácil de usar e entender, sendo uma escolha natural para situações que envolvem a remoção de elementos na ordem 
+inversa da inserção.
+
+- Operações Eficientes:
+Oferece operações eficientes de empilhamento (Push) e desempilhamento (Pop), com complexidade de tempo constante 
+(O(1)).
+
+
+-- Desvantagens
+
+- Limitada a Estrutura LIFO:
+Sua natureza LIFO pode ser uma desvantagem em cenários que requerem acesso a elementos em uma ordem específica, 
+como FIFO (First-In-First-Out).
+
+- Não fornece acesso direto por índice aleatório:
+Significa que você não pode acessar elementos por meio de um índice específico como faria em uma lista ou um array.
+
+- Ausência de Métodos de Busca:
+Não possui métodos específicos para busca de elementos, o que pode tornar ineficiente encontrar um elemento sem 
+removê-lo.
+
+- Limitada a Operações Básicas:
+Limitada a operações básicas de empilhamento (Push) e desempilhamento (Pop), não oferecendo funcionalidades mais 
+avançadas.
+
+
+
+═══════════════════════════════════════════════════> SortedDictionary<TKey,TValue> vs SortedList<TKey,TValue>
+
+- SortedDictionary<TKey, TValue>:
+
+Tende a ter um melhor desempenho em operações de adição e remoção, especialmente em conjuntos de dados maiores, 
+devido à estrutura de árvore.
+
+Tende a consumir mais memória devido à estrutura de árvore necessária para manter a ordem.
+
+Não suporta acesso direto por índice; as operações de busca são baseadas nas chaves.
+
+Mais adequado quando as operações de adição e remoção são frequentes, e a ordem dos elementos é crucial.
+
+
+- SortedList<TKey,TValue>:
+
+Oferece melhor desempenho em operações que envolvem acesso por índice (usando índices como em uma lista) e 
+possui menor overhead de memória em comparação com SortedDictionary.
+
+Pode consumir menos memória do que SortedDictionary, pois usa um array interno.
+
+Permite acesso direto por índice, semelhante a uma lista.
+
+Mais adequado quando há um grande número de acessos por índice e a ordem dos elementos é crucial.

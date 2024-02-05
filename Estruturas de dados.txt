@@ -1,8 +1,7 @@
 
 
 ═══════════════════════════════════════════════════> Estruturas de dados
-Documentação => // https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-8.0
-
+Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-8.0
 
 
 
@@ -11,6 +10,7 @@ Dictionary<TKey,TValue>
 HashSet<T>
 ImmutableArray<T> 
 ImmutableDictionary<TKey, TValue>
+ImmutableList<T>
 List<T>
 LinkedList<T>
 Queue<T>
@@ -44,6 +44,11 @@ Array.BinarySearch()
 
 
 -- Desvantagens
+
+- Desempenho impactado pelo tamanho da estrutura:
+Estruturas baseadas em arrays, como listas, operações de busca linear (Contains, IndexOf) 
+têm uma complexidade de O(n), onde n é o número de elementos na lista. Portanto, à medida que o tamanho da lista 
+aumenta, o tempo de busca pode aumentar de maneira linear.
 
 - Tamanho Fixo:
 O tamanho do array é fixo após a criação, o que pode ser limitante em situações em que o número de elementos 
@@ -79,7 +84,7 @@ valores associados a uma chave específica.
 
 - Alta performance para operações de adição/remoção:
 Adicionar ou remover elementos em um Dictionary é rápido, especialmente quando comparado a outras estruturas de
-dados que podem ter complexidade maiorpara essas operações.
+dados que podem ter complexidade maior para essas operações.
 
 - Flexibilidade nas chaves e valores:
 O Dictionary permite que você use uma ampla variedade de tipos para as chaves e os valores, proporcionando 
@@ -124,8 +129,7 @@ Verificar se um elemento pertence a um HashSet é uma operação muito rápida, 
 
 - Desempenho eficiente para adição e remoção de elementos:
 Adicionar e remover elementos em um HashSet é rápido e eficiente. Isso é especialmente útil quando você precisa manter
- uma coleção dinâmica 
-de elementos exclusivos.
+uma coleção dinâmica de elementos exclusivos.
 
 
 -- Desvantagens
@@ -220,6 +224,43 @@ A imutabilidade requer a criação de novas instâncias para realizar alteraçõ
 cenários.
 
 
+
+═══════════════════════════════════════════════════> ImmutableList<T>
+
+-- Vantagens
+
+- Imutabilidade:
+Os objetos ImmutableList<T> são imutáveis, o que significa que não podem ser alterados após a criação. Isso ajuda 
+a evitar efeitos colaterais inesperados e facilita a programação concorrente.
+
+- Persistência:
+Ao realizar operações de modificação em uma ImmutableList<T>, ela cria uma nova lista com as alterações, preservando 
+a versão original. Isso é útil para rastrear alterações e manter cópias de estados anteriores.
+
+Performance:
+Embora a criação de novas instâncias envolva cópias, as operações eficientes e otimizadas tornam a ImmutableList<T> 
+eficiente para muitos cenários. Além disso, o compartilhamento de estrutura entre versões torna as operações mais 
+rápidas do que uma abordagem ingênua de cópia completa.
+
+- API Rica:
+Oferece uma API rica com métodos convenientes para realizar operações comuns, como adição, remoção e concatenação, 
+enquanto mantém a imutabilidade.
+
+- Thread Safe
+
+
+-- Desvantagens
+
+- Overhead de Memória:
+Como as operações de modificação criam novas instâncias da lista, pode haver um aumento no consumo de memória, 
+especialmente em cenários onde a lista é frequentemente modificada. Isso pode impactar a eficiência em casos de uso intensivo de memória.
+
+- Complexidade da API:
+Embora a API de ImmutableList<T> seja rica, algumas operações que são simples e eficientes em listas mutáveis podem ser mais verbosas e 
+menos intuitivas com listas imutáveis. Isso pode aumentar a complexidade do código em alguns casos.
+
+
+
 ═══════════════════════════════════════════════════> List<T>
 
 Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=net-8.0
@@ -250,6 +291,11 @@ Fornece uma API rica com métodos úteis para manipulação de dados.
 
 
 -- Desvantagens
+
+- Desempenho impactado pelo tamanho da estrutura:
+Estruturas baseadas em arrays, como listas, operações de busca linear (Contains, IndexOf) 
+têm uma complexidade de O(n), onde n é o número de elementos na lista. Portanto, à medida que o tamanho da lista 
+aumenta, o tempo de busca pode aumentar de maneira linear.
 
 - Ineficiente para Inserção e Remoção no Meio:
 Operações de inserção e remoção no meio da lista podem ser ineficientes, especialmente em grandes conjuntos de
@@ -402,7 +448,7 @@ Documentação => https://learn.microsoft.com/en-us/dotnet/api/system.collection
 Mantém os elementos automaticamente ordenados, facilitando a recuperação em ordem.
 
 - Eficiência em Busca e Inserção:
- Oferece operações eficientes de busca (O(log n)) e inserção de elementos mantendo a ordenação.
+Oferece operações eficientes de busca (O(log n)) e inserção de elementos mantendo a ordenação.
 
 - Sem Elementos Duplicados:
 Garante que todos os elementos são únicos, sendo útil quando a exclusividade de elementos é crucial.
@@ -468,6 +514,28 @@ removê-lo.
 - Limitada a Operações Básicas:
 Limitada a operações básicas de empilhamento (Push) e desempilhamento (Pop), não oferecendo funcionalidades mais 
 avançadas.
+
+
+
+═══════════════════════════════════════════════════> ImmutableArray<T> vs ImmutableList<T>
+
+- ImmutableArray<T>:
+
+O acesso aos elementos é eficiente por índice, semelhante a um array tradicional, sendo mais eficiente do 
+que a ImmutableList<T>.
+
+É mais eficiente quando se trata de criar cópias modificadas ou partições, especialmente para arrays grandes.
+
+Geralmente consome menos memória por elemento, pois utiliza um array subjacente.
+
+Pode ser mais adequado para cenários em que o acesso eficiente por índice e operações de cópia ou particionamento são comuns.
+
+
+- ImmutableList<T>: 
+
+Pode ser mais eficiente ao inserir ou remover elementos no meio da coleção, devido à natureza vinculada da lista.
+
+Pode ser mais adequado para cenários em que inserção e remoção eficientes no meio da coleção são mais frequentes.
 
 
 
